@@ -28,9 +28,15 @@ func (s *State) OnDemandRunnerConfigPut(o *pb.OnDemandRunnerConfig) error {
 	defer memTxn.Abort()
 
 	err := s.db.Update(func(dbTxn *bolt.Tx) error {
+		// TODO: should we validate static runner exists on profile creation?
+		//if o.TargetRunnerId != "" {
+		//	_, err := look up static runner
+		//	if err != nil {
+		//		return status.Errorf(codes.FailedPrecondition, "Target runner %q must exist.", o.TargetRunnerId)
+		//	}
+		//}
 		if o.Id != "" {
-			var err error
-			_, err = s.onDemandRunnerGet(dbTxn, memTxn, &pb.Ref_OnDemandRunnerConfig{Id: o.Id})
+			_, err := s.onDemandRunnerGet(dbTxn, memTxn, &pb.Ref_OnDemandRunnerConfig{Id: o.Id})
 			if err != nil {
 				return err
 			}
