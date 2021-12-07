@@ -28,7 +28,7 @@ func (a *App) CanDestroyDeploy() bool {
 	return ok
 }
 
-// DestroyDeploy destroyes a specific deployment.
+// DestroyDeploy destroys a specific deployment.
 func (a *App) DestroyDeploy(ctx context.Context, d *pb.Deployment) error {
 	return a.destroyDeploy(ctx, d, nil)
 }
@@ -67,7 +67,7 @@ func (a *App) destroyAllDeploys(ctx context.Context) error {
 	return nil
 }
 
-// destroyDeploy destroyes a specific deployment. "d" is the deployment
+// destroyDeploy destroys a specific deployment. "d" is the deployment
 // to destroy. "configD" is the deployment to use to render the configuration.
 // If configD is nil, then "d" is used.
 //
@@ -118,6 +118,13 @@ func (a *App) destroyDeploy(
 		Deployment: d,
 	})
 	return err
+
+	// Destroy releases
+	a.client.GetRelease(ctx, &pb.GetReleaseRequest{
+		Ref: &pb.Ref_Operation{
+			Target: &pb.Ref_Operation_Id{Id: resp.Release.Id}
+		},
+	})
 }
 
 // destroyDeployWorkspace will call the DestroyWorkspace hook if there

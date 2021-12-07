@@ -385,9 +385,12 @@ func (s *service) onDemandRunnerStartJob(
 	// we'll probably want this to be controllable by runner profiles
 	// so that start tasks get sent to the right cluster.
 	job.TargetRunner = &pb.Ref_Runner{
-		Target: &pb.Ref_Runner_Any{
-			Any: &pb.Ref_RunnerAny{},
+		Target: &pb.Ref_Runner_Id{
+			Id: &pb.Ref_RunnerId{},
 		},
+		//&pb.Ref_Runner_Any{
+		//Any: &pb.Ref_RunnerAny{},
+		//},
 	}
 
 	return job, runnerId, nil
