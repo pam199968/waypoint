@@ -2368,7 +2368,7 @@ message Hostname {
   // target_labels are the raw label targets given to the URL service.
   // We can't reproduce the richer "Target" structure yet but in the future
   // we may expose that.
-  map<string,string> target_labels = 3;
+  map<string, string> target_labels = 3;
 
   message Target {
     oneof target {
@@ -2540,7 +2540,7 @@ message Build {
   Artifact artifact = 4;
 
   // labels are the set of labels that are present on this build.
-  map<string,string> labels = 5;
+  map<string, string> labels = 5;
 
   // template data for HCL variables and template functions, json-encoded
   bytes template_data = 10;
@@ -2591,6 +2591,10 @@ message OnDemandRunnerConfig {
 
   // name is the unique name for this config
   string name = 8;
+
+  // target_runner_id is the id of the runner to target for this profile
+  // if not set, defaults to use any runner available
+  string target_runner_id = 9;
 
   // oci_url is the OCI image that will be used to boot the ondemand runner.
   string oci_url = 2;
@@ -2720,7 +2724,7 @@ message PushedArtifact {
   string build_id = 5;
 
   // labels are the set of labels that are present on this build.
-  map<string,string> labels = 6;
+  map<string, string> labels = 6;
 
   // template data for HCL variables and template functions, json-encoded
   bytes template_data = 12;
@@ -2869,7 +2873,7 @@ message Deployment {
   string deployment_json = 20;
 
   // labels are the set of labels that are present on this build.
-  map<string,string> labels = 7;
+  map<string, string> labels = 7;
 
   // template data for HCL variables and template functions, json-encoded
   bytes template_data = 14;
@@ -3111,7 +3115,7 @@ message Release {
   string deployment_id = 5;
 
   // labels are the set of labels that are present on this build.
-  map<string,string> labels = 6;
+  map<string, string> labels = 6;
 
   // template data for HCL variables and template functions, json-encoded
   bytes template_data = 14;
@@ -3266,7 +3270,7 @@ message ExpediteStatusReportRequest {
 
 // id of job expedited by the request
 message ExpediteStatusReportResponse {
-    string job_id = 1;
+  string job_id = 1;
 }
 
 // StatusReport is the report genrated when querying the overall health of
@@ -3746,8 +3750,8 @@ message ExecStreamResponse {
 
     enum Channel {
       UNKNOWN = 0;
-      STDOUT  = 1;
-      STDERR  = 2;
+      STDOUT = 1;
+      STDERR = 2;
     }
   }
 }
@@ -3822,7 +3826,7 @@ message EntrypointConfig {
     Component component = 1;
 
     // labels are the set of labels that are present on the deployment.
-    map<string,string> labels = 2;
+    map<string, string> labels = 2;
   }
 }
 
@@ -3868,8 +3872,8 @@ message EntrypointExecRequest {
 
     enum Channel {
       UNKNOWN = 0;
-      STDOUT  = 1;
-      STDERR  = 2;
+      STDOUT = 1;
+      STDERR = 2;
     }
   }
 
