@@ -118,13 +118,6 @@ func (a *App) destroyDeploy(
 		Deployment: d,
 	})
 	return err
-
-	// Destroy releases
-	a.client.GetRelease(ctx, &pb.GetReleaseRequest{
-		Ref: &pb.Ref_Operation{
-			Target: &pb.Ref_Operation_Id{Id: resp.Release.Id}
-		},
-	})
 }
 
 // destroyDeployWorkspace will call the DestroyWorkspace hook if there

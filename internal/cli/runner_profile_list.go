@@ -35,7 +35,8 @@ func (c *RunnerProfileListCommand) Run(args []string) int {
 
 	c.ui.Output("Runner profiles")
 
-	tbl := terminal.NewTable("Name", "Plugin Type", "OCI Url", "Default")
+	tbl := terminal.NewTable("Name", "Plugin Type", "OCI Url", "Target Runner",
+		"Default")
 
 	for _, p := range resp.Configs {
 		def := ""
@@ -47,6 +48,7 @@ func (c *RunnerProfileListCommand) Run(args []string) int {
 			p.Name,
 			p.PluginType,
 			p.OciUrl,
+			p.TargetRunnerId,
 			def,
 		}, nil)
 	}

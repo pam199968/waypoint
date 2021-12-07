@@ -20,12 +20,13 @@ import (
 type RunnerProfileSetCommand struct {
 	*baseCommand
 
-	flagName         string
-	flagOCIUrl       string
-	flagEnvVars      []string
-	flagPluginType   string
-	flagPluginConfig string
-	flagDefault      bool
+	flagName           string
+	flagOCIUrl         string
+	flagEnvVars        []string
+	flagPluginType     string
+	flagPluginConfig   string
+	flagDefault        bool
+	flagTargetRunnerId string
 }
 
 func (c *RunnerProfileSetCommand) Run(args []string) int {
@@ -95,6 +96,9 @@ func (c *RunnerProfileSetCommand) Run(args []string) int {
 			Name: c.flagName,
 		}
 	}
+
+	// Set as empty string to "unset" target runner
+	od.TargetRunnerId = c.flagTargetRunnerId
 
 	// If we were specified a file then we're going to load that up.
 	if c.flagPluginConfig != "" {
@@ -249,6 +253,13 @@ func (c *RunnerProfileSetCommand) Flags() *flag.Sets {
 			Default: false,
 			Usage: "Indicates that this on-demand runner should be used by any project that doesn't " +
 				"otherwise specify its own on-demand runner.",
+		})
+
+		f.StringVar(&flag.StringVar{
+			Name:    "target-runner-id",
+			Target:  &c.flagTargetRunnerId,
+			Default: "",
+			Usage:   "ID of the on-demand runner to target for the profile.",
 		})
 	})
 }
