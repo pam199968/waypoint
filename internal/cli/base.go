@@ -888,7 +888,7 @@ for the server.
 `)
 
 	warnProjectFlagMismatch = strings.TrimSpace(`
-Warning: Currently in project directory for %q, but will operate 
-against specified project %q
+Warning: Currently in project directory for %q, but was requested 
+to operate against specified project %q with '-project'
 `)
 )
