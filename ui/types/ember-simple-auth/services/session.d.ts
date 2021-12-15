@@ -8,9 +8,12 @@ declare module 'ember-simple-auth/services/session' {
     invalidate(): Promise<void>;
     attemptedTransition: Transition;
     data: SessionData;
+
+    set(key: string, value: unknown): void;
   }
 
   interface SessionData {
     authenticated?: Record<string, unknown>;
+    workspace?: string;
   }
 }
