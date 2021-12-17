@@ -41,6 +41,9 @@ type Runner struct {
 	// then the "-remote" flag will not work.
 	Enabled bool `hcl:"enabled,optional"`
 
+	// Profile is the on-demand runner configuration.
+	Profile string `hcl:"profile"`
+
 	// DataSource is the default data source when a remote job is queued.
 	DataSource *DataSource `hcl:"data_source,block"`
 

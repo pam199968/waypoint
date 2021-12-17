@@ -50,12 +50,9 @@ func New(ctx context.Context, opts ...Option) (*Project, error) {
 		UI:     terminal.ConsoleUI(ctx),
 		logger: hclog.L(),
 		runner: &pb.Ref_Runner{
-			Target: &pb.Ref_Runner_Id{
-				Id: &pb.Ref_RunnerId{},
+			Target: &pb.Ref_Runner_Any{
+				Any: &pb.Ref_RunnerAny{},
 			},
-			//Target: &pb.Ref_Runner_Any{
-			//	Any: &pb.Ref_RunnerAny{},
-			//},
 		},
 	}
 
